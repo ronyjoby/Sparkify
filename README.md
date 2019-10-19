@@ -45,4 +45,4 @@ We have used Random Forest algorithm for the modelling and we were able to get a
 
 Credit to Udacity
 
-[Click here to read the post on Medium](https://medium.com/@akessela/predict-customer-churn-for-sparkify-945d373b5f3)
+[Click here to read the post on Medium](https://medium.com/@ronyjoby/sparkify-predict-customer-churn-9545d81b7d77?sk=cc86710b3d2fe0c2cd61b033ae8df96d)
