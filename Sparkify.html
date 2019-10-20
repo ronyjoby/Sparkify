@@ -13135,8 +13135,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Sparkify-Project-Workspace">Sparkify Project Workspace<a class="anchor-link" href="#Sparkify-Project-Workspace">&#182;</a></h1><p>This workspace contains a tiny subset (128MB) of the full dataset available (12GB). Feel free to use this workspace to build your project, or to explore a smaller subset with Spark before deploying your cluster on the cloud. Instructions for setting up your Spark cluster is included in the last lesson of the Extracurricular Spark Course content.</p>
-<p>You can follow the steps below to guide your data analysis and model building portion of this project.</p>
+<h1 id="Udacity-Data-Scientist-Capstone-project">Udacity Data Scientist Capstone project<a class="anchor-link" href="#Udacity-Data-Scientist-Capstone-project">&#182;</a></h1><h2 id="Project-Title:-Sparkify">Project Title: Sparkify<a class="anchor-link" href="#Project-Title:-Sparkify">&#182;</a></h2><h3 id="Project-Overview">Project Overview<a class="anchor-link" href="#Project-Overview">&#182;</a></h3><p>Sparkify is a music streaming service just as Spotify and Pandora.</p>
+<p>The data provided is the user log of the service, having demographic info, user activities, timestamps and etc. We try to analyze the log and build a model to identify customers who are highly likely to quit using our service, and thus, send marketing offers to them to prevent them from churning.</p>
 
 </div>
 </div>
@@ -13144,8 +13144,15 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Problem-Statement">Problem Statement<a class="anchor-link" href="#Problem-Statement">&#182;</a></h1><p>Sparkify is a music streaming service just as Spotify and Pandora.</p>
-<p>The data provided is the user log of the service, having demographic info, user activities, timestamps and etc. We try to analyze the log and build a model to identify customers who are highly likely to quit using our service, and thus, send marketing offers to them to prevent them from churning.</p>
+<h1 id="Problem-Statement">Problem Statement<a class="anchor-link" href="#Problem-Statement">&#182;</a></h1><p>Create an ML model that predict sparkify customer churn. A customer churns if he/she downgrades to the free tier or cancel his/her subscription altogether.By generating new features that are good predictors of customer churn, we can build a machine learning model to predict which of sparkify current users are likely to churn.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Metrics-to-evaluate-performance">Metrics to evaluate performance<a class="anchor-link" href="#Metrics-to-evaluate-performance">&#182;</a></h1><p>We have used F1 score to evaluate model performance as the dataset provided is highly imbalanced, i.e. the number of churned users is very small compared to number of active users.</p>
 
 </div>
 </div>
@@ -13200,7 +13207,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Load-and-Clean-Dataset">Load and Clean Dataset<a class="anchor-link" href="#Load-and-Clean-Dataset">&#182;</a></h1><p>In this workspace, the mini-dataset file is <code>mini_sparkify_event_data.json</code>. Load and clean the dataset, checking for invalid or missing data - for example, records without userids or sessionids.</p>
+<h1 id="Data-Exploration">Data Exploration<a class="anchor-link" href="#Data-Exploration">&#182;</a></h1><p>In this workspace, the mini-dataset file is <code>mini_sparkify_event_data.json</code>. Load and clean the dataset, checking for invalid or missing data - for example, records without userids or sessionids.</p>
 
 </div>
 </div>
@@ -13878,17 +13885,7 @@ We can look for how many of the customers who have downgraded have also cancelle
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Exploratory-Data-Analysis">Exploratory Data Analysis<a class="anchor-link" href="#Exploratory-Data-Analysis">&#182;</a></h1><p>When you're working with the full dataset, perform EDA by loading a small subset of the data and doing basic manipulations within Spark. In this workspace, you are already provided a small subset of data you can explore.</p>
-<h3 id="Define-Churn">Define Churn<a class="anchor-link" href="#Define-Churn">&#182;</a></h3><p>Once you've done some preliminary analysis, create a column <code>Churn</code> to use as the label for your model. I suggest using the <code>Cancellation Confirmation</code> events to define your churn, which happen for both paid and free users. As a bonus task, you can also look into the <code>Downgrade</code> events.</p>
-<h3 id="Explore-Data">Explore Data<a class="anchor-link" href="#Explore-Data">&#182;</a></h3><p>Once you've defined churn, perform some exploratory data analysis to observe the behavior for users who stayed vs users who churned. You can start by exploring aggregates on these two groups of users, observing how much of a specific action they experienced per a certain time unit or number of songs played.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Define-churn">Define churn<a class="anchor-link" href="#Define-churn">&#182;</a></h1>
+<h2 id="Define-churn">Define churn<a class="anchor-link" href="#Define-churn">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -14202,7 +14199,7 @@ only showing top 5 rows
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Visualization-of-results">Visualization of results<a class="anchor-link" href="#Visualization-of-results">&#182;</a></h3>
+<h1 id="Visualization-of-results">Visualization of results<a class="anchor-link" href="#Visualization-of-results">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -14299,7 +14296,7 @@ only showing top 5 rows
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Feature-Engineering">Feature Engineering<a class="anchor-link" href="#Feature-Engineering">&#182;</a></h1><p>Once you've familiarized yourself with the data, build out the features you find promising to train your model on. To work with the full dataset, you can follow the following steps.</p>
+<h1 id="Data-Preprocessing">Data Preprocessing<a class="anchor-link" href="#Data-Preprocessing">&#182;</a></h1><p>Once you've familiarized yourself with the data, build out the features you find promising to train your model on. To work with the full dataset, you can follow the following steps.</p>
 <ul>
 <li>Write a script to extract the necessary features from the smaller subset of data</li>
 <li>Ensure that your script is scalable, using the best practices discussed in Lesson 3</li>
@@ -14679,7 +14676,7 @@ only showing top 2 rows
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Modeling">Modeling<a class="anchor-link" href="#Modeling">&#182;</a></h1><p>Split the full dataset into train, test, and validation sets. Test out several of the machine learning methods you learned. Evaluate the accuracy of the various models, tuning parameters as necessary. Determine your winning model based on test accuracy and report results on the validation set. Since the churned users are a fairly small subset, I suggest using F1 score as the metric to optimize.</p>
+<h1 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h1><p>Split the full dataset into train, test, and validation sets. Test out several of the machine learning methods you learned. Evaluate the accuracy of the various models, tuning parameters as necessary. Determine your winning model based on test accuracy and report results on the validation set. Since the churned users are a fairly small subset, I suggest using F1 score as the metric to optimize.</p>
 
 </div>
 </div>
@@ -14899,7 +14896,7 @@ RandomForestClassificationModel (uid=RandomForestClassifier_16ed9b6a4833) with 1
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Fine-tuning-of-the-model">Fine tuning of the model<a class="anchor-link" href="#Fine-tuning-of-the-model">&#182;</a></h4>
+<h1 id="Fine-tuning--/-Refinement">Fine tuning  / Refinement<a class="anchor-link" href="#Fine-tuning--/-Refinement">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -15068,7 +15065,7 @@ F1 score = 0.727263
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h4><p>We have used Random Forest algorithm for the modelling and we were able to get an F1 score of 0.727263 on the test dataset. The model peformance can be further improved by creating additional features. Once we are satisfied with this smaller dataset, we can utilize the entire sparkify dataset for better results.</p>
+<h1 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h1><p>We have analysed the sparkify dataset and come up with new features to predict churn. We then created a machine learning model and tuned it to improve its performance. We achieved an accuracy score of 87% and F1 score of 0.727263 on the test dataset.</p>
 
 </div>
 </div>
@@ -15076,23 +15073,18 @@ F1 score = 0.727263
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Final-Steps">Final Steps<a class="anchor-link" href="#Final-Steps">&#182;</a></h1><p>Clean up your code, adding comments and renaming variables to make the code easier to read and maintain. Refer to the Spark Project Overview page and Data Scientist Capstone Project Rubric to make sure you are including all components of the capstone project and meet all expectations. Remember, this includes thorough documentation in a README file in a Github repository, as well as a web app or blog post.</p>
+<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>We have used Random Forest algorithm for the modelling and we were able to get an F1 score of 0.727263 on the test dataset. The model peformance can be further improved by creating additional features. Once we are satisfied with this smaller dataset, we can utilize the entire sparkify dataset for better results.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Future-Improvements">Future Improvements<a class="anchor-link" href="#Future-Improvements">&#182;</a></h1><p>The model peformance can be further improved by creating additional features and includiding some of the features that we have left out for this analysis. The model should be tested out against the bigger data set for more accuracy. We can also try to test with multiple models and with multiple model parameters and picks the best fitted algorithm for the model. For our analysis we picked up RFandom Forest Classifier as that seems the best approach for thios data set.</p>
 
-    </div>
 </div>
 </div>
-
 </div>
     </div>
   </div>
