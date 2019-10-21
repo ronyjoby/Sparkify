@@ -39,7 +39,8 @@ In this project we'll be performing the following tasks:
 We have analysed the sparkify dataset and come up with new features to predict churn. We then created a machine learning model and tuned it to improve its performance. We achieved an accuracy score of - and F1 score of - on the test dataset. 
 
 ## Conclusion
-We have used Random Forest algorithm for the modelling and we were able to get an accuracy score of 87% and F1 score of 0.727263 on the test dataset. The model peformance can be further improved by creating additional features. Once we are satisfied with this smaller dataset, we can utilize the entire sparkify dataset for better results.
+We have tried many models like Random Forest, SVM, Logistic Regression. We found that Random Forest classfier is the best model for this data set.
+We have used Random Forest algorithm for the modelling and we were able to get an accuracy score of 77% and F1 score of 0.679888 on the test dataset. The model peformance can be further improved by creating additional features. Once we are satisfied with this smaller dataset, we can utilize the entire sparkify dataset for better results.
 
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
