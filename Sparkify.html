@@ -13159,7 +13159,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import libraries</span>
@@ -13168,7 +13168,7 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">pyspark.sql.types</span> <span class="k">as</span> <span class="nn">psqt</span>
 <span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="k">import</span> <span class="n">VectorAssembler</span><span class="p">,</span> <span class="n">StandardScaler</span>\
 
-<span class="kn">from</span> <span class="nn">pyspark.ml.classification</span> <span class="k">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">pyspark.ml.classification</span> <span class="k">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">GBTClassifier</span><span class="p">,</span><span class="n">LinearSVC</span><span class="p">,</span> <span class="n">RandomForestClassifier</span>
 <span class="kn">from</span> <span class="nn">pyspark.mllib.util</span> <span class="k">import</span> <span class="n">MLUtils</span>
 
 <span class="kn">from</span> <span class="nn">pyspark.mllib.evaluation</span> <span class="k">import</span> <span class="n">BinaryClassificationMetrics</span>
@@ -13182,6 +13182,7 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 
@@ -13192,7 +13193,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a Spark session</span>
@@ -13214,7 +13215,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Load the  small subset of data</span>
@@ -13230,7 +13231,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -13267,7 +13268,7 @@ only showing top 1 row
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Print schema of the dataset</span>
@@ -13319,7 +13320,7 @@ only showing top 1 row
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Get/count null values for each column</span>
@@ -13358,7 +13359,7 @@ only showing top 1 row
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Check whether the page and userid columns has zero null values</span>
@@ -13396,7 +13397,7 @@ only showing top 1 row
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Count number of customers are in free and paid groups </span>
@@ -13494,7 +13495,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get the number of ouccrance of all the events from page column.</span>
@@ -13553,7 +13554,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get more details about the cancel and cancel_confirmation events</span>
@@ -13597,7 +13598,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Similar to calncel events, get the downgrade events</span>
@@ -13650,7 +13651,7 @@ We can look for how many of the customers who have downgraded have also cancelle
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cancel_ids</span>  <span class="o">=</span> <span class="p">[</span><span class="n">vv</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">vv</span> <span class="ow">in</span> <span class="n">cancel_events</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;userID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()]</span>
@@ -13682,7 +13683,7 @@ We can look for how many of the customers who have downgraded have also cancelle
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">downgrade_reg_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">vv</span><span class="p">[</span><span class="s1">&#39;userID&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">vv</span> <span class="ow">in</span> <span class="n">downgrade_events</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;userID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()]</span>
@@ -13782,19 +13783,15 @@ We can look for how many of the customers who have downgraded have also cancelle
 <pre>+------+---------+---------+-------------+
 |userID|     page|firstName|           ts|
 +------+---------+---------+-------------+
-|    17|Downgrade|    Kayla|1539171080000|
-|    17|Downgrade|    Kayla|1539196195000|
-|    17|Downgrade|    Kayla|1539204767000|
-|    17|Downgrade|    Kayla|1539221809000|
-|    17|Downgrade|    Kayla|1539239457000|
-|    17|Downgrade|    Kayla|1539300668000|
-|    17|Downgrade|    Kayla|1539322917000|
-|    17|Downgrade|    Kayla|1539333698000|
-|    17|Downgrade|    Kayla|1539337545000|
-|    17|Downgrade|    Kayla|1539349211000|
-|    17|Downgrade|    Kayla|1539432890000|
-|    17|Downgrade|    Kayla|1539446116000|
-|    17|   Cancel|    Kayla|1539465451000|
+|   129|Downgrade|    Davis|1538896047000|
+|   129|Downgrade|    Davis|1538911363000|
+|   129|Downgrade|    Davis|1538923089000|
+|   129|Downgrade|    Davis|1539010046000|
+|   129|Downgrade|    Davis|1539347207000|
+|   129|Downgrade|    Davis|1539362366000|
+|   129|Downgrade|    Davis|1539367200000|
+|   129|Downgrade|    Davis|1539736068000|
+|   129|   Cancel|    Davis|1539736069000|
 +------+---------+---------+-------------+
 
 </pre>
@@ -13858,20 +13855,16 @@ We can look for how many of the customers who have downgraded have also cancelle
 <pre>+------+-------------------------+---------+-------------+-------------------+
 |userID|page                     |firstName|ts           |ts_datetime        |
 +------+-------------------------+---------+-------------+-------------------+
-|17    |Downgrade                |Kayla    |1539171080000|2018-10-10 11:31:20|
-|17    |Downgrade                |Kayla    |1539196195000|2018-10-10 18:29:55|
-|17    |Downgrade                |Kayla    |1539204767000|2018-10-10 20:52:47|
-|17    |Downgrade                |Kayla    |1539221809000|2018-10-11 01:36:49|
-|17    |Downgrade                |Kayla    |1539239457000|2018-10-11 06:30:57|
-|17    |Downgrade                |Kayla    |1539300668000|2018-10-11 23:31:08|
-|17    |Downgrade                |Kayla    |1539322917000|2018-10-12 05:41:57|
-|17    |Downgrade                |Kayla    |1539333698000|2018-10-12 08:41:38|
-|17    |Downgrade                |Kayla    |1539337545000|2018-10-12 09:45:45|
-|17    |Downgrade                |Kayla    |1539349211000|2018-10-12 13:00:11|
-|17    |Downgrade                |Kayla    |1539432890000|2018-10-13 12:14:50|
-|17    |Downgrade                |Kayla    |1539446116000|2018-10-13 15:55:16|
-|17    |Cancel                   |Kayla    |1539465451000|2018-10-13 21:17:31|
-|17    |Cancellation Confirmation|Kayla    |1539465584000|2018-10-13 21:19:44|
+|129   |Downgrade                |Davis    |1538896047000|2018-10-07 07:07:27|
+|129   |Downgrade                |Davis    |1538911363000|2018-10-07 11:22:43|
+|129   |Downgrade                |Davis    |1538923089000|2018-10-07 14:38:09|
+|129   |Downgrade                |Davis    |1539010046000|2018-10-08 14:47:26|
+|129   |Downgrade                |Davis    |1539347207000|2018-10-12 12:26:47|
+|129   |Downgrade                |Davis    |1539362366000|2018-10-12 16:39:26|
+|129   |Downgrade                |Davis    |1539367200000|2018-10-12 18:00:00|
+|129   |Downgrade                |Davis    |1539736068000|2018-10-17 00:27:48|
+|129   |Cancel                   |Davis    |1539736069000|2018-10-17 00:27:49|
+|129   |Cancellation Confirmation|Davis    |1539736161000|2018-10-17 00:29:21|
 +------+-------------------------+---------+-------------+-------------------+
 
 </pre>
@@ -13899,7 +13892,7 @@ We can look for how many of the customers who have downgraded have also cancelle
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define 1 as churned, 0 otherwise</span>
@@ -13916,7 +13909,7 @@ We can look for how many of the customers who have downgraded have also cancelle
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">churn_event</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -13963,7 +13956,7 @@ only showing top 3 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">labeled_df</span>  <span class="o">=</span> <span class="n">churn_event</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;userId&#39;</span><span class="p">)</span>
@@ -14005,7 +13998,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">churned_count</span> <span class="o">=</span> <span class="n">labeled_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -14042,7 +14035,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Lets compare songs played by churned users vs active users</span>
@@ -14081,7 +14074,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Compare number of dislikes for churned vs active users</span>
@@ -14120,7 +14113,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Compare number of songs liked for churned vs active users</span>
@@ -14159,7 +14152,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Compare number of downgrades for churned vs active users</span>
@@ -14205,7 +14198,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">use_level_count</span> <span class="o">=</span> <span class="n">labeled_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;userId&#39;</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -14244,7 +14237,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">use_level_count_pd</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
@@ -14327,7 +14320,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Number of distinct hour counts a user logged in the system</span>
@@ -14345,7 +14338,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_count_df</span> <span class="o">=</span> <span class="n">hour_count</span><span class="p">()</span>
@@ -14387,7 +14380,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get number of songs each user played</span>
@@ -14404,7 +14397,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">songsplayed</span> <span class="o">=</span> <span class="n">songs_count</span><span class="p">()</span>
@@ -14446,7 +14439,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">labeled_df</span> <span class="o">=</span> <span class="n">labeled_df</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">psqf</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;userId&#39;</span><span class="p">)</span><span class="o">!=</span><span class="s1">&#39;null&#39;</span><span class="p">)</span> 
@@ -14459,7 +14452,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get Thumbs up and Tgumbs down count</span>
@@ -14477,7 +14470,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">thumbsup_count</span><span class="p">,</span> <span class="n">thumbsdown_count</span> <span class="o">=</span> <span class="n">get_counts</span><span class="p">()</span>
@@ -14531,7 +14524,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Join all the features to define the churn event</span>
@@ -14576,7 +14569,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create an assembler from these selected features</span>
@@ -14619,7 +14612,7 @@ only showing top 4 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define a scalar and fit the features.</span>
@@ -14636,7 +14629,7 @@ only showing top 4 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_data</span> <span class="o">=</span> <span class="n">features_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">psqf</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">psqt</span><span class="o">.</span><span class="n">IntegerType</span><span class="p">()))</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;features&#39;</span><span class="p">)</span>
@@ -14694,7 +14687,7 @@ only showing top 2 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Index labels, adding metadata to the label column.</span>
@@ -14720,7 +14713,7 @@ only showing top 2 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Split the data into training and test sets </span>
@@ -14736,13 +14729,13 @@ only showing top 2 rows
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Choose-the-model-to-train">Choose the model to train<a class="anchor-link" href="#Choose-the-model-to-train">&#182;</a></h4>
+<h3 id="Random-Forest-Classifier">Random Forest Classifier<a class="anchor-link" href="#Random-Forest-Classifier">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_pipeline</span><span class="p">():</span>
@@ -14763,7 +14756,7 @@ only showing top 2 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Train model. </span>
@@ -14778,7 +14771,7 @@ only showing top 2 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Make predictions.</span>
@@ -14803,11 +14796,11 @@ only showing top 2 rows
 <pre>+--------------+-----+--------------------+
 |predictedLabel|label|            features|
 +--------------+-----+--------------------+
-|             0|    0|[3.65478282185840...|
-|             0|    1|[2.54553517943116...|
-|             0|    0|[1.85471940211985...|
-|             0|    0|[3.20140696800688...|
-|             0|    0|[0.57523181457050...|
+|             0|    0|[1.72748744313385...|
+|             0|    0|[1.00799967506513...|
+|             1|    1|[0.33779189111071...|
+|             0|    1|[1.30547157917325...|
+|             0|    0|[3.23993495558715...|
 +--------------+-----+--------------------+
 only showing top 5 rows
 
@@ -14821,7 +14814,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Evaluate the model</span>
@@ -14848,8 +14841,8 @@ only showing top 5 rows
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Validation Error = 0.297297
-RandomForestClassificationModel (uid=RandomForestClassifier_16ed9b6a4833) with 10 trees
+<pre>Validation Error = 0.263158
+RandomForestClassificationModel (uid=RandomForestClassifier_27b98c79706e) with 10 trees
 </pre>
 </div>
 </div>
@@ -14860,7 +14853,7 @@ RandomForestClassificationModel (uid=RandomForestClassifier_16ed9b6a4833) with 1
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get F1 score and evaluate</span>
@@ -14884,7 +14877,7 @@ RandomForestClassificationModel (uid=RandomForestClassifier_16ed9b6a4833) with 1
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>F1 score = 0.639719
+<pre>F1 score = 0.66408
 </pre>
 </div>
 </div>
@@ -14896,13 +14889,272 @@ RandomForestClassificationModel (uid=RandomForestClassifier_16ed9b6a4833) with 1
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Fine-tuning--/-Refinement">Fine tuning  / Refinement<a class="anchor-link" href="#Fine-tuning--/-Refinement">&#182;</a></h1>
+<h3 id="Logistic-Regression">Logistic Regression<a class="anchor-link" href="#Logistic-Regression">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># initialize classifier</span>
+<span class="k">def</span> <span class="nf">logistic_regression</span><span class="p">():</span>    
+    <span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">maxIter</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">f1_evaluator</span> <span class="o">=</span> <span class="n">MulticlassClassificationEvaluator</span><span class="p">(</span><span class="n">metricName</span><span class="o">=</span><span class="s1">&#39;f1&#39;</span><span class="p">)</span>
+
+    <span class="n">paramGrid</span> <span class="o">=</span> <span class="n">ParamGridBuilder</span><span class="p">()</span> \
+        <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+    <span class="n">crossval_lr</span> <span class="o">=</span> <span class="n">CrossValidator</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span>
+                              <span class="n">evaluator</span><span class="o">=</span><span class="n">f1_evaluator</span><span class="p">,</span> 
+                              <span class="n">estimatorParamMaps</span><span class="o">=</span><span class="n">paramGrid</span><span class="p">,</span>
+                              <span class="n">numFolds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">crossval_lr</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crossval_lr</span> <span class="o">=</span> <span class="n">logistic_regression</span><span class="p">()</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">cvModel_lr</span> <span class="o">=</span> <span class="n">crossval_lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainingData</span><span class="p">)</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">cvModel_lr</span><span class="o">.</span><span class="n">avgMetrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The training process took </span><span class="si">{}</span><span class="s1"> seconds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The training process took 694.3865914344788 seconds
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results_lr</span> <span class="o">=</span> <span class="n">cvModel_lr</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">validationData</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">MulticlassClassificationEvaluator</span><span class="p">(</span><span class="n">predictionCol</span><span class="o">=</span><span class="s2">&quot;prediction&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logistic Regression Metrics:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">results_lr</span><span class="p">,</span> <span class="p">{</span><span class="n">evaluator</span><span class="o">.</span><span class="n">metricName</span><span class="p">:</span> <span class="s2">&quot;accuracy&quot;</span><span class="p">})))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F-1 Score:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">results_lr</span><span class="p">,</span> <span class="p">{</span><span class="n">evaluator</span><span class="o">.</span><span class="n">metricName</span><span class="p">:</span> <span class="s2">&quot;f1&quot;</span><span class="p">})))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Logistic Regression Metrics:
+Accuracy: 0.6842105263157895
+F-1 Score:0.6263157894736844
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Support-Vector-Machine">Support Vector Machine<a class="anchor-link" href="#Support-Vector-Machine">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Support Vector machine model</span>
+
+<span class="k">def</span> <span class="nf">svm</span><span class="p">():</span>
+
+    <span class="n">svm</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">maxIter</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">f1_evaluator</span> <span class="o">=</span> <span class="n">MulticlassClassificationEvaluator</span><span class="p">(</span><span class="n">metricName</span><span class="o">=</span><span class="s1">&#39;f1&#39;</span><span class="p">)</span>
+
+    <span class="n">paramGrid</span> <span class="o">=</span> <span class="n">ParamGridBuilder</span><span class="p">()</span> \
+        <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+    <span class="n">crossval_svm</span> <span class="o">=</span> <span class="n">CrossValidator</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">svm</span><span class="p">,</span>
+                              <span class="n">estimatorParamMaps</span><span class="o">=</span><span class="n">paramGrid</span><span class="p">,</span>
+                              <span class="n">evaluator</span><span class="o">=</span><span class="n">f1_evaluator</span><span class="p">,</span>
+                              <span class="n">numFolds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">crossval_svm</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crossval_svm</span> <span class="o">=</span> <span class="n">svm</span><span class="p">()</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">cvModel_svm</span> <span class="o">=</span> <span class="n">crossval_svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trainingData</span><span class="p">)</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">cvModel_svm</span><span class="o">.</span><span class="n">avgMetrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The training process took </span><span class="si">{}</span><span class="s1"> seconds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The training process took 734.9559786319733 seconds
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">results_svm</span> <span class="o">=</span> <span class="n">cvModel_svm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">validationData</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">MulticlassClassificationEvaluator</span><span class="p">(</span><span class="n">predictionCol</span><span class="o">=</span><span class="s2">&quot;prediction&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SVM Metrics:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">results_svm</span><span class="p">,</span> <span class="p">{</span><span class="n">evaluator</span><span class="o">.</span><span class="n">metricName</span><span class="p">:</span> <span class="s2">&quot;accuracy&quot;</span><span class="p">})))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F-1 Score:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">results_svm</span><span class="p">,</span> <span class="p">{</span><span class="n">evaluator</span><span class="o">.</span><span class="n">metricName</span><span class="p">:</span> <span class="s2">&quot;f1&quot;</span><span class="p">})))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>SVM Metrics:
+Accuracy: 0.6842105263157895
+F-1 Score:0.5559210526315791
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Model-summary">Model summary<a class="anchor-link" href="#Model-summary">&#182;</a></h4><p>The logistic regression model has a accuracy of: 0.684 and F-1 Score:0.626</p>
+<p>The Support vector machine model has a accuracy of: 0.684, and F1 score of: 0.555</p>
+<p>The Random forest model has a accuracy of: 0.776, and F1 score of: 0.66408</p>
+<p>we will prefer the model that perform the best. Therefore, we choose Random Forest Classifier model as our final model and conduct a grid search to fine tune our model this time.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Fine-tuning--/-Refinement">Fine tuning  / Refinement<a class="anchor-link" href="#Fine-tuning--/-Refinement">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We use grid search to fine tune our Random Foresr Classifier. We mainly tuned two parameters, maxDepth and numTrees.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">new_model</span><span class="p">():</span>
@@ -14926,7 +15178,7 @@ RandomForestClassificationModel (uid=RandomForestClassifier_16ed9b6a4833) with 1
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cv</span> <span class="o">=</span> <span class="n">new_model</span><span class="p">()</span>
@@ -14940,7 +15192,7 @@ RandomForestClassificationModel (uid=RandomForestClassifier_16ed9b6a4833) with 1
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Method to evaluate our model</span>
@@ -14976,7 +15228,7 @@ RandomForestClassificationModel (uid=RandomForestClassifier_16ed9b6a4833) with 1
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># On validation set </span>
@@ -15000,16 +15252,16 @@ RandomForestClassificationModel (uid=RandomForestClassifier_16ed9b6a4833) with 1
 <pre>+--------------+-----+--------------------+
 |predictedLabel|label|            features|
 +--------------+-----+--------------------+
-|             0|    0|[3.65478282185840...|
-|             0|    1|[2.54553517943116...|
-|             0|    0|[1.85471940211985...|
-|             0|    0|[3.20140696800688...|
-|             0|    0|[0.57523181457050...|
+|             0|    0|[1.72748744313385...|
+|             0|    0|[1.00799967506513...|
+|             1|    1|[0.33779189111071...|
+|             0|    1|[1.30547157917325...|
+|             0|    0|[3.23993495558715...|
 +--------------+-----+--------------------+
 only showing top 5 rows
 
-Error = 0.297297
-F1 score = 0.639719
+Error = 0.315789
+F1 score = 0.596895
 </pre>
 </div>
 </div>
@@ -15020,7 +15272,7 @@ F1 score = 0.639719
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># On Test data</span>
@@ -15045,15 +15297,15 @@ F1 score = 0.639719
 |predictedLabel|label|            features|
 +--------------+-----+--------------------+
 |             0|    0|[0.24639992057147...|
-|             0|    0|[0.73471976315859...|
-|             0|    0|[1.72748744313385...|
+|             0|    1|[1.89145539027778...|
 |             0|    1|[0.23027192577043...|
-|             0|    0|[3.25427095096585...|
+|             0|    0|[0.19263993790133...|
+|             1|    0|[0.21235193154705...|
 +--------------+-----+--------------------+
 only showing top 5 rows
 
-Error = 0.229167
-F1 score = 0.727263
+Error = 0.272727
+F1 score = 0.679888
 </pre>
 </div>
 </div>
@@ -15065,7 +15317,8 @@ F1 score = 0.727263
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h1><p>We have analysed the sparkify dataset and come up with new features to predict churn. We then created a machine learning model and tuned it to improve its performance. We achieved an accuracy score of 87% and F1 score of 0.727263 on the test dataset.</p>
+<h1 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h1><p>We have analysed the sparkify dataset and come up with new features to predict churn. We then created a machine learning model and tuned it to improve its performance. We achieved an accuracy score of 77% and F1 score of 0.679888 on the test dataset.</p>
+<p>We use grid search to fine tune our Random Foresr Classifier. We mainly tuned two parameters, maxDepth and numTrees.</p>
 
 </div>
 </div>
@@ -15073,7 +15326,9 @@ F1 score = 0.727263
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>We have used Random Forest algorithm for the modelling and we were able to get an F1 score of 0.727263 on the test dataset. The model peformance can be further improved by creating additional features. Once we are satisfied with this smaller dataset, we can utilize the entire sparkify dataset for better results.</p>
+<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>In this project, we have implemented a model trying to predict customer churn. We have done all the pre processing required for the data like removed rows with no userId, converted timestamp to a human readable format, converted gender to binary numeric column.</p>
+<p>We have selected different features to define our churn. We selected 3 models: logistic regression,  SVM, and RF to compare and selected Random Forest as the final model implemented for predicting final result.</p>
+<p>We used cross validation and grid search to fine tune our model. We achieved about 77% accuracy, and 0.679888 F1 score.</p>
 
 </div>
 </div>
@@ -15085,6 +15340,19 @@ F1 score = 0.727263
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     </div>
   </div>
